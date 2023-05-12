@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { Button } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 
 import logo from "../../assets/images/logo.png";
-import "./index.css";
-import Navbar from "./Navbar";
+import "../../styles/header.css";
 
 const nav_links = [
   {
@@ -24,46 +23,66 @@ const nav_links = [
 ];
 
 const Header = () => {
+  const headerRef = useRef(null);
+  const stickyHeaderFunc = () => {
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 0 ||
+        document.documentElement.scrollTop > 0
+      ) {
+        headerRef.current.classList.add("sticky__header");
+      } else {
+        headerRef.current.classList.remove("sticky__header");
+      }
+    });
+  };
+
+  useEffect(() => {
+    stickyHeaderFunc();
+
+    return window.removeEventListener("scroll", stickyHeaderFunc);
+  });
   return (
-    <header className={"header header-section d-none d-xl-block"}>
-      <Navbar>
-        <div className="nav__wrapper d-flex align-items-center justify-content-between">
-          <div className="logo">
-            <img src={logo} alt="logo"></img>
-          </div>
-
-          <div className="navigation">
-            <ul className="menu d-flex align-items-center gap-5">
-              {nav_links.map((item, index) => (
-                <li className="nav__item" key={index}>
-                  <NavLink
-                    to={item.path}
-                    className={(navClass) =>
-                      navClass.isActive ? "active__link" : ""
-                    }
-                  >
-                    {item.display}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="nav__right d-flex align-items-center gap-4">
-            <div className="nav__btns d-flex align-items-center gap-4 m-4">
-              <Button className="btn secondary__btn">
-                <Link to="/login">Fazer Login</Link>
-              </Button>
-              <Button className="btn primary__btn">
-                <Link to="/register">Criar Conta</Link>
-              </Button>
-            </div>
-            <span className="mobile__menu">
-              <i class="ri-menu-line"></i>
-            </span>
-          </div>
+    <header
+      className={"header header-section d-none d-xl-block"}
+      ref={headerRef}
+    >
+      <div className="nav__wrapper d-flex align-items-center justify-content-between">
+        <div className="logo">
+          <img src={logo} alt="logo"></img>
         </div>
-      </Navbar>
+
+        <div className="navigation">
+          <ul className="menu d-flex align-items-center gap-5">
+            {nav_links.map((item, index) => (
+              <li className="nav__item" key={index}>
+                <NavLink
+                  to={item.path}
+                  className={(navClass) =>
+                    navClass.isActive ? "active__link" : ""
+                  }
+                >
+                  {item.display}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="nav__right d-flex align-items-center gap-4">
+          <div className="nav__btns d-flex align-items-center gap-4 m-4">
+            <Button className="btn secondary__btn">
+              <Link to="/login">Fazer Login</Link>
+            </Button>
+            <Button className="btn primary__btn">
+              <Link to="/register">Criar Conta</Link>
+            </Button>
+          </div>
+          <span className="mobile__menu">
+            <i class="ri-menu-line"></i>
+          </span>
+        </div>
+      </div>
     </header>
   );
 };

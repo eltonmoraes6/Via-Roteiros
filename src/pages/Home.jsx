@@ -7,19 +7,21 @@ import Subtitle from "../shared/Subtitle";
 import SearchBar from "../shared/SearchBar";
 import FeaturedTourList from "../components/Featured-tours/FeaturedTourList";
 import ServiceList from "../services/ServiceList";
+import MasonryImagesGallery from "../components/Image-gallery/MasonryImagesGallery";
+import Testimonials from "../components/Testimonials";
 
 import worldImg from "../assets/images/world.png";
 import heroImg from "../assets/images/hero-img01.jpg";
 import heroImg02 from "../assets/images/hero-img02.jpg";
 import heroVideo from "../assets/images/hero-video.mp4";
 import experienceImg from "../assets/images/experience.png";
-import MasonryImagesGallery from "../components/Image-gallery/MasonryImagesGallery";
+import Newsletter from "../shared/Newsletter";
 
 const Home = () => {
   return (
     <>
       <section>
-        <Container>
+        <Container className="mt-4">
           <Row>
             <Col lg="6">
               <div className="hero__content">
@@ -164,9 +166,14 @@ const Home = () => {
               <Subtitle subtitle={"Fans Love"} />
               <h2 className="testimonial__title">What our fans say about us</h2>
             </Col>
+            <Col lg="12">
+              <Testimonials />
+            </Col>
           </Row>
         </Container>
       </section>
+
+      <Newsletter />
     </>
   );
 };
