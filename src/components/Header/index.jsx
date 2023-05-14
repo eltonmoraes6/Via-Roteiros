@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { Button, Container, Row } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 
@@ -23,12 +23,18 @@ const nav_links = [
 ];
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const goTo = (url) => {
+    navigate(`${url}`);
+  };
+
   const headerRef = useRef(null);
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
       if (
-        document.body.scrollTop > 0 ||
-        document.documentElement.scrollTop > -70
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > -80
       ) {
         headerRef.current.classList.add("sticky__header");
       } else {
@@ -50,7 +56,7 @@ const Header = () => {
       <Container>
         <Row>
           <div className="nav__wrapper d-flex align-items-center justify-content-between">
-            <div className="logo">
+            <div className="logo" onClick={() => goTo("/home")}>
               <img src={logo} alt="logo"></img>
             </div>
 

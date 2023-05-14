@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container, Col, Row, Form, FormGroup, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,8 @@ import loginImg from "../assets/images/login.png";
 import userIcon from "../assets/images/user.png";
 
 const Login = () => {
+  const inputRef = useRef(null);
+
   const [credentials, setCredentials] = useState({
     email: "eltonmoraes6@gmail.com",
     password: "123456",
@@ -17,11 +19,23 @@ const Login = () => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
+  const [passwordShown, setPasswordShown] = useState(false);
+  // Password toggle handler
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     // navigate("/home");
     console.log("credentials: ", credentials);
   };
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   return (
     <section>
@@ -45,18 +59,31 @@ const Login = () => {
                       placeholder="E-mail"
                       required
                       id="email"
+                      value={credentials.email}
+                      ref={inputRef}
                       onChange={handleChange}
                     />
                   </FormGroup>
 
                   <FormGroup>
-                    <input
-                      type="password"
-                      placeholder="Senha"
-                      required
-                      id="password"
-                      onChange={handleChange}
-                    />
+                    <div className="input__field">
+                      <input
+                        type={passwordShown ? "text" : "password"}
+                        placeholder="Senha"
+                        required
+                        id="password"
+                        value={credentials.password}
+                        onChange={handleChange}
+                      />
+
+                      <span onClick={() => togglePassword()}>
+                        {passwordShown ? (
+                          <i class="ri-eye-line"></i>
+                        ) : (
+                          <i class="ri-eye-off-line"></i>
+                        )}
+                      </span>
+                    </div>
                   </FormGroup>
 
                   <Button
