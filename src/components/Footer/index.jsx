@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "../../styles/footer.css";
 
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo-via-roteiros.png";
 
 const quick_links = [
   {
