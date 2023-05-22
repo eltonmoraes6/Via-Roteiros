@@ -32,7 +32,7 @@ const ServiceList = () => {
   return (
     <>
       {serviceData.map((item) => (
-        <Col lg="3" key={item.id}>
+        <Col lg="3" md="6" sm="12" className="mb-4" key={item.id}>
           <ServiceCard item={item} />
         </Col>
       ))}

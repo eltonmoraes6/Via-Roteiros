@@ -1,14 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Container, Col, Row, Form, FormGroup, Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../context/Auth";
+import { BASE_URL } from "../utilities/config";
 
 import "../styles/login.css";
 
 import registerImg from "../assets/images/register.png";
 import userIcon from "../assets/images/user.png";
+import {
+  USER_LOGIN_SUCCESS,
+  USER_REGISTER_SUCCESS,
+} from "../context/constants";
 
 const Register = () => {
   const inputRef = useRef(null);
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     name: "Elton",
     familyName: "Moraes",
@@ -16,6 +25,8 @@ const Register = () => {
     password: "123456",
     confirmPassword: "123456",
   });
+
+  const { dispatch } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -37,10 +48,33 @@ const Register = () => {
     setConfirmPasswordShown(!confirmPasswordShown);
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     // navigate("/home");
     console.log("credentials: ", credentials);
+
+    const { name, familyName, email, password } = credentials;
+
+    const username = name + " " + familyName;
+    try {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const result = await res.json();
+      if (!res.ok) {
+        alert(result.message);
+      }
+
+      dispatch({ type: USER_REGISTER_SUCCESS });
+      navigate("/login");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   useEffect(() => {

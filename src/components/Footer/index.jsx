@@ -45,7 +45,7 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-          <Col gl="3">
+          <Col lg="3">
             <div className="logo">
               <img src={logo} alt="logo" />
               <p>
@@ -82,7 +82,7 @@ const Footer = () => {
             </div>
           </Col>
 
-          <Col gl="3">
+          <Col lg="3">
             <h5 className="footer__link-title">Discover</h5>
             <ListGroup className="footer__quick-links">
               {quick_links.map((item, index) => (
@@ -93,7 +93,7 @@ const Footer = () => {
             </ListGroup>
           </Col>
 
-          <Col gl="3">
+          <Col lg="3">
             <h5 className="footer__link-title">Quick Links</h5>
             <ListGroup className="footer__quick-links">
               {quick_links2.map((item, index) => (
@@ -104,7 +104,7 @@ const Footer = () => {
             </ListGroup>
           </Col>
 
-          <Col gl="3">
+          <Col lg="3">
             <h5 className="footer__link-title">Contact</h5>
             <ListGroup className="footer__quick-links">
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">

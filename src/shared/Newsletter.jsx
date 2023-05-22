@@ -9,7 +9,7 @@ const Newsletter = () => {
     <section className="newsletter">
       <Container>
         <Row>
-          <Col gl="6">
+          <Col lg="6">
             <div className="newsletter__content">
               <h2>Subiscribe now to get useful traveling infirmation</h2>
               <div className="newsletter__input">
@@ -22,7 +22,7 @@ const Newsletter = () => {
               </p>
             </div>
           </Col>
-          <Col gl="6">
+          <Col lg="6">
             <div className="newsletter__img">
               <img src={maleTourist} alt="male-tourist" />
             </div>

@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useContext } from "react";
 import { Button, Container, Row } from "reactstrap";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../context/Auth";
+import { nameToUpperCase } from "../../utilities/getInitials.js";
 
 import logo from "../../assets/images/logo-via-roteiros.png";
 import "../../styles/header.css";
+import { USER_LOGOUT } from "../../context/constants";
 
 const nav_links = [
   {
@@ -24,12 +27,20 @@ const nav_links = [
 
 const Header = () => {
   const navigate = useNavigate();
+  const { user, dispatch } = useContext(AuthContext);
+
+  const logout = () => {
+    dispatch({ type: USER_LOGOUT });
+    navigate("/");
+  };
 
   const goTo = (url) => {
     navigate(`${url}`);
   };
 
   const headerRef = useRef(null);
+  const menuRef = useRef(null);
+
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -45,22 +56,21 @@ const Header = () => {
 
   useEffect(() => {
     stickyHeaderFunc();
-
     return window.removeEventListener("scroll", stickyHeaderFunc);
   });
+
+  const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
+
   return (
-    <header
-      className={"header header-section d-none d-xl-block"}
-      ref={headerRef}
-    >
+    <header className="header" ref={headerRef}>
       <Container>
         <Row>
           <div className="nav__wrapper d-flex align-items-center justify-content-between">
             <div className="logo" onClick={() => goTo("/home")}>
-              <img src={logo} alt="logo"></img>
+              <img src={logo} alt="logo" />
             </div>
 
-            <div className="navigation">
+            <div className="navigation" ref={menuRef} onClick={toggleMenu}>
               <ul className="menu d-flex align-items-center gap-5">
                 {nav_links.map((item, index) => (
                   <li className="nav__item" key={index}>
@@ -78,15 +88,28 @@ const Header = () => {
             </div>
 
             <div className="nav__right d-flex align-items-center gap-4">
-              <div className="nav__btns d-flex align-items-center gap-4 m-4">
-                <Button className="btn secondary__btn">
-                  <Link to="/login">Fazer Login</Link>
-                </Button>
-                <Button className="btn primary__btn">
-                  <Link to="/register">Criar Conta</Link>
-                </Button>
+              <div className="nav__btns d-flex align-items-center gap-4 ">
+                {user ? (
+                  <>
+                    <h5 className="mb-0">
+                      Olá, {nameToUpperCase(user.username)}
+                    </h5>
+                    <button className="btn btn-dark" onClick={logout}>
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Button className="btn secondary__btn">
+                      <Link to="/login">Fazer Login</Link>
+                    </Button>
+                    <Button className="btn primary__btn">
+                      <Link to="/register">Criar Conta</Link>
+                    </Button>
+                  </>
+                )}
               </div>
-              <span className="mobile__menu">
+              <span className="mobile__menu" onClick={toggleMenu}>
                 <i class="ri-menu-line"></i>
               </span>
             </div>
