@@ -57,25 +57,25 @@ const Footer = () => {
               <div className="social__links d-flex align-items-center gap-4">
                 <span>
                   <Link to="">
-                    <i class="ri-youtube-line" />
+                    <i className="ri-youtube-line" />
                   </Link>
                 </span>
 
                 <span>
                   <Link to="">
-                    <i class="ri-github-fill" />
+                    <i className="ri-github-fill" />
                   </Link>
                 </span>
 
                 <span>
                   <Link to="">
-                    <i class="ri-facebook-circle-line" />
+                    <i className="ri-facebook-circle-line" />
                   </Link>
                 </span>
 
                 <span>
                   <Link to="">
-                    <i class="ri-instagram-line" />
+                    <i className="ri-instagram-line" />
                   </Link>
                 </span>
               </div>
@@ -110,7 +110,7 @@ const Footer = () => {
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
                 <h6 className="mb-0 d-flex align-items-center gap-2">
                   <span>
-                    <i class="ri-map-pin-line" /> Address:
+                    <i className="ri-map-pin-line" /> Address:
                   </span>
                 </h6>
                 <p className="mb-0">Propriá, SE</p>
@@ -121,7 +121,7 @@ const Footer = () => {
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
                 <h6 className="mb-0 d-flex align-items-center gap-2">
                   <span>
-                    <i class="ri-mail-line" /> E-mail:
+                    <i className="ri-mail-line" /> E-mail:
                   </span>
                 </h6>
                 <p className="mb-0">eltonmoraes6@gmail.com</p>
@@ -132,7 +132,7 @@ const Footer = () => {
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
                 <h6 className="mb-0 d-flex align-items-center gap-2">
                   <span>
-                    <i class="ri-phone-fill" /> Telefone:
+                    <i className="ri-phone-fill" /> Telefone:
                   </span>
                 </h6>
                 <p className="mb-0">+55 (79) 90000-0000 </p>

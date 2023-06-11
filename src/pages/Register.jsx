@@ -144,9 +144,9 @@ const Register = () => {
 
                       <span onClick={() => togglePassword()}>
                         {passwordShown ? (
-                          <i class="ri-eye-line"></i>
+                          <i className="ri-eye-line"></i>
                         ) : (
-                          <i class="ri-eye-off-line"></i>
+                          <i className="ri-eye-off-line"></i>
                         )}
                       </span>
                     </div>
@@ -164,9 +164,9 @@ const Register = () => {
                       />
                       <span onClick={() => toggleConfirmPassword()}>
                         {confirmPasswordShown ? (
-                          <i class="ri-eye-line"></i>
+                          <i className="ri-eye-line"></i>
                         ) : (
-                          <i class="ri-eye-off-line"></i>
+                          <i className="ri-eye-off-line"></i>
                         )}
                       </span>
                     </div>

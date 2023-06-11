@@ -10,18 +10,28 @@
 
 .form__group span {
   font-size: 1.8rem;
-  color: #ee6e6e;
-}
-
-.form__group input {
-  border: none;
-  font-size: 0.9rem;
-  color: var(--heading-color);
-  font-weight: 500;
+  color: var(--secondary-color);
 }
 
 .form__group input:focus {
   outline: none;
+}
+
+.form__group input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--heading-color);
+  font-size: 0.9rem;
+  border: none;
+  border-bottom: 1px solid #1c6cd4;
+}
+
+.search__bar button,
+.search__bar button h6 {
+  background-color: var(--secondary-color);
+  color: var(--heading-color);
 }
 
 .form__group h6 {
@@ -32,6 +42,15 @@
   border-right: 2px solid #ddd;
 }
 
+.form__group-label {
+  display: flex;
+  text-align: center;
+}
+
+.form__group-label h6 {
+  padding-top: 0.6rem;
+}
+
 .search__icon i {
   font-size: 1.6rem;
   padding: 0.5rem;
@@ -39,6 +58,43 @@
   color: #fff;
   border-radius: 10px 5px 10px 5px;
   cursor: pointer;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  min-width: 100%;
+  padding-bottom: 1rem;
+  display: inline;
+}
+
+.autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  background: #fff;
+  border-radius: 5px;
+  max-height: 300px;
+  border: 1px solid var(--secondary-color);
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+/* .autocomplete-items::-webkit-scrollbar {
+  display: none; 
+} */
+
+.autocomplete-items .data__item {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.autocomplete-items .data__item:hover {
+  background: var(--secondary-color);
 }
 
 /*Make it responsive*/
@@ -52,8 +108,39 @@
   .search__bar form {
     flex-wrap: wrap;
   }
+
   .search__bar form .form__group {
     width: 48%;
+  }
+
+  .form__group-button {
+    display: block;
+    margin: auto;
+    width: 70%;
+    margin-bottom: 1rem;
+  }
+  .form__group-button i {
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .search__bar form .form__group {
+    width: 100%;
+  }
+
+  .form__group input {
+    font-size: 0.7rem;
+  }
+
+  .form__group-button {
+    display: block;
+    width: 100%;
+  }
+  .form__group-button i {
+    margin-left: auto;
+    margin-right: 0;
   }
 }
 
@@ -72,5 +159,9 @@
 
   .form__group h6 {
     font-size: 1rem;
+  }
+
+  .form__group__content input {
+    width: 100%;
   }
 }
